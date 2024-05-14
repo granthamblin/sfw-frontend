@@ -1,45 +1,85 @@
-import Image from 'next/image'
-import logoImage from '../../public/images/sfw2.png'
-import starImage from '../../public/images/shooting-star.png'
-import TeamSlider from '../components/TeamSlider'
+'use client'
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { useEffect } from 'react';
+import Image from 'next/image';
+import logoImage from '../../public/images/sfw2.png';
+import starImage from '../../public/images/shooting-star.png';
+import TeamSlider from '../components/TeamSlider';
 
 export default function HomePage() {
+  const fadeInVariant = {
+    visible: { opacity: 1, transition: { duration: 3 } },
+    hidden: { opacity: 0 },
+  };
+
+  const { ref: ref1, inView: inView1 } = useInView({ triggerOnce: false });
+  const { ref: ref2, inView: inView2 } = useInView({ triggerOnce: false });
+  const { ref: ref3, inView: inView3 } = useInView({ triggerOnce: false });
+  const { ref: ref4, inView: inView4 } = useInView({ triggerOnce: false });
+
+  const controls1 = useAnimation();
+  const controls2 = useAnimation();
+  const controls3 = useAnimation();
+  const controls4 = useAnimation();
+
+  useEffect(() => {
+    if (inView1) controls1.start('visible');
+    else controls1.start('hidden');
+    if (inView2) controls2.start('visible');
+    else controls2.start('hidden');
+    if (inView3) controls3.start('visible');
+    else controls3.start('hidden');
+    if (inView4) controls4.start('visible');
+    else controls4.start('hidden');
+  }, [controls1, controls2, controls3, controls4, inView1, inView2, inView3, inView4]);
 
   return (
     <>
-    <div className="bg-[#6EC0E5] h-screen flex flex-col justify-center items-center">
-        <h1 className="font-bold text-8xl text-[#1F457E] fadeIn">Students For Wishes UofT</h1>
-        <h2 className="mt-10 text-3xl mb-20 fadeIn">The Happiness Campaign: Granting Wishes, Spreading Smiles</h2>
-        <Image 
-          src={logoImage}
-          width={500} 
-          height={500} 
-          alt="logo"
-        />
-    </div>
-    <div className='bg-[#C6E1F4] pt-10 pb-10 flex flex-col items-center justify-center'>
-        <h1 className="font-bold text-8xl text-[#1F457E] ml-20 fadeIn">Who Are We?</h1>
-      </div>
-      <div className='bg-[#61BBE2] flex items-center justify-center p-10'>
-        <div className="flex-1">
-          <p className="text-l ml-20">
-            Make-A-Wish Canada is an independently operating affiliate of Make-A-Wish international. We create life-changing wishes for children with critical illnesses, and we are on a quest to bring every eligible child's wish to life, because a wish is an integral part of a child's treatment journey. Research shows children who have wishes granted can build the physical and emotional strength they need to fight a critical illness. Make-A-Wish is the world’s leading children’s wish-granting organization, operating in 50 countries. Here in Canada, we serve children in every community from coast to coast to coast.
-            Since 1983, Make-A-Wish Canada has granted over 37,000 wishes across the country, over 1,000 last year alone.
+      <motion.div
+        className="bg-[#6EC0E5] min-h-screen flex flex-col justify-center items-center p-5"
+        ref={ref1}
+        initial="hidden"
+        animate={controls1}
+        variants={fadeInVariant}
+      >
+        <h1 className="font-bold text-4xl md:text-8xl text-[#1F457E] text-center">Students For Wishes UofT</h1>
+        <h2 className="mt-5 text-xl md:text-3xl mb-10 text-center">The Happiness Campaign: Granting Wishes, Spreading Smiles</h2>
+        <Image src={logoImage} width={250} height={250} alt="logo" priority />
+      </motion.div>
+      <motion.div
+        className="bg-[#C6E1F4] pt-5 pb-5 md:pt-10 md:pb-10 flex flex-col items-center justify-center"
+        ref={ref2}
+        initial="hidden"
+        animate={controls2}
+        variants={fadeInVariant}
+      >
+        <h1 className="font-bold text-3xl md:text-8xl text-[#1F457E] text-center">Who Are We?</h1>
+      </motion.div>
+      <motion.div
+        className="bg-[#61BBE2] flex flex-col md:flex-row items-center justify-center p-5 gap-5"
+        ref={ref3}
+        initial="hidden"
+        animate={controls3}
+        variants={fadeInVariant}
+      >
+        <div className="text-center">
+          <p className="text-md md:text-lg">
+            Make-A-Wish Canada is an independently operating affiliate of Make-A-Wish international. We create life-changing wishes for children with critical illnesses...
           </p>
         </div>
-        <div className="flex-1 flex justify-center mr-5">
-          <Image
-            src={starImage}
-            width={300}
-            height={300}
-            alt="star"
-          />
-        </div>
-      </div>
-      <div className='bg-[#C6E1F4] h-screen flex flex-col items-center justify-center'>
-        <h1 className="font-bold text-8xl text-[#1F457E] ml-20 pt-10 pb-10 fadeIn">Meet the Team</h1>
+        <Image src={starImage} width={200} height={200} alt="star" priority />
+      </motion.div>
+      <motion.div
+        className="bg-[#C6E1F4] min-h-screen flex flex-col items-center justify-center"
+        ref={ref4}
+        initial="hidden"
+        animate={controls4}
+        variants={fadeInVariant}
+      >
+        <h1 className="font-bold text-3xl md:text-8xl text-[#1F457E] text-center mb-5">Meet the Team</h1>
         <TeamSlider />
-      </div>
+      </motion.div>
     </>
   );
 }

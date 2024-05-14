@@ -16,3 +16,16 @@
 .fadeIn {
   animation: fadeIn 2s ease-out;
 }
+
+@keyframes loadProgressBar {
+  0% { width: 0; }
+  100% { width: var(--progress-width); }
+}
+
+.progressBar {
+  animation: loadProgressBar 2s ease-out forwards;
+}
+
+body {
+  overscroll-behavior: none;
+}

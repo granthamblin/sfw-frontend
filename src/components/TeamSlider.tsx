@@ -3,13 +3,11 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 const teamMembers = [
-    { src: '/images/team1.png', name: 'Baylee', role: 'Co-President' },
-    { src: '/images/team2.png', name: 'Anika', role: 'Co-President' },
-    { src: '/images/team3.png', name: 'Jennifer', role: 'Sponsorship Director' },
-    { src: '/images/team4.png', name: 'Pallavi', role: 'Sponsorship Director' },
-    { src: '/images/team5.png', name: 'Rahil', role: 'Logistics Director' },
-    { src: '/images/team6.png', name: 'Max', role: 'Finance Director' },
-    { src: '/images/team7.png', name: 'Fatima', role: 'Marketing Director' },
+    { src: '/images/baylee.png', name: 'Baylee', role: 'Co-President' },
+    { src: '/images/jennifer.png', name: 'Jennifer', role: 'Sponsorship Director' },
+    { src: '/images/pallavi.png', name: 'Pallavi', role: 'Sponsorship Director' },
+    { src: '/images/max.png', name: 'Max', role: 'Finance Director' },
+    { src: '/images/fatima.png', name: 'Fatima', role: 'Marketing Director' },
 ]
 
 export default function TeamSlider() {
@@ -23,8 +21,10 @@ export default function TeamSlider() {
       setCurrentImage((prevIndex) => (prevIndex - 1 + teamMembers.length) % teamMembers.length)
     }
   return (
-    <div className='bg-[#61BBE2] flex flex-col items-center justify-center p-10 space-y-4'>
-      <Image src={teamMembers[currentImage].src} width={300} height={300} alt="Team" />
+    <div className='bg-white rounded-xl shadow-lg flex flex-col items-center justify-center p-10 space-y-4'>
+      <div className="image-container" style={{ width: '300px', height: '300px', position: 'relative', overflow: 'hidden' }}>
+        <Image src={teamMembers[currentImage].src} layout="fill" objectFit="cover" alt="Team" />
+      </div>
       <div className="text-center">
         <p className="text-xl font-bold">{teamMembers[currentImage].name}</p>
         <p className="text-lg">{teamMembers[currentImage].role}</p>
