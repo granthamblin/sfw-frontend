@@ -8,7 +8,6 @@ export default function NewsletterPage() {
   return (
     <div>
       <h1>Newsletter {id}</h1>
-      {/* Display the newsletter content here */}
     </div>
   );
 };

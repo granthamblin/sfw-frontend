@@ -1,14 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import thumbnailPlaceholder from '../../../public/images/max.png'; // Replace with actual path
+import thumbnailPlaceholder from '../../../public/images/max.png'; 
 
 export default function NewslettersPage() {
-  // Placeholder newsletters data
   const newsletters = [
     { id: 1, name: 'Newsletter 1 Name', description: 'Newsletter 1 Description', date: 'DATE', image: thumbnailPlaceholder },
     { id: 2, name: 'Newsletter 2 Name', description: 'Newsletter 2 Description', date: 'DATE', image: thumbnailPlaceholder },
     { id: 3, name: 'Newsletter 3 Name', description: 'Newsletter 3 Description', date: 'DATE', image: thumbnailPlaceholder },
-    // Add more newsletters as needed
   ];
 
   return (
